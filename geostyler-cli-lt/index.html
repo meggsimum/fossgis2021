@@ -44,10 +44,9 @@
       <div class="slides">
 
         <section id="title"
-          data-background-image="../shared/img/geostyler-talk/geostyler_logo_filter.svg"
+          data-background-image="../shared/img/geostyler_logo_filter.svg"
           data-background-size="auto 90%">
-          <!-- <h3>Massenkonvertieren kartographischer Stildokumente mit GeoStyler-CL</h3> -->
-          <h2>Massenkonvertieren kartographischer Stildokumente mit GeoStyler-CL</h2>
+          <h2>Massenkonvertieren kartographischer Stildokumente mit GeoStyler-CI</h2>
           <br />
           <p>
             <small>Jan Suleiman, Daniel Koch, terrestris GmbH & Co. KG</small>
@@ -61,45 +60,54 @@
 
         <section>
           <h2>GeoStyler</h2>
-          <p>Features</p>
             <ul>
-              <li>Regelbasierte Stile (inkl. Symbolizer)</li>
-              <li>Einfache bis komplexe Komponenten</li>
-              <li>Previews der Stile</li>
-              <li>Klassifikationen</li>
-              <li>ScaleDenominator & komplexe Filter</li>
-              <li>Berechnung überschneidender Regeln</li>
+              <li>Gebrauchsfertige JS Bibliothek zum Styling für Geodaten</li>
+              <li>Unterstützte Formate</li>
+              <ul>
+                <li>SLD, Mapfiles, Mapbox, QGIS, OpenLayers ...</li>
+              </ul>
+              <li>Umfangreiche webbasierte UI Komponenten</li>
+              <li><a href="https://geostyler.org" target="blank">geostyler.org</a></li>
             </ul>
         </section>
 
         <section>
-          <h2>GeoStyler</h2>
-          <p>Features</p>
-            <ul>
-              <li>Einbindung in bestehende Web(GIS) Projekte</li>
-              <li>Nutzung ohne UI-Komponenten</li>
-              <li>Verschiedene Layouts</li>
-              <li>i18n</li>
-            </ul>
-        </section>
-
-        <section>
-          <h2>Installation</h2>
+          <h2>GeoStyler CLI</h2>
+          <ul>
+            <li>Überführung von Stildokumenten in andere Formate</li>
+            <li>Voraussetzung: NodeJS</li>
+            <li>Installation</li>
+          </ul>
           <pre><code data-trim class="bash">
-              $ npm i geostyler
-
-              $ npm i geostyler-style
-              $ npm i geostyler-data
-
-              $ npm i geostyler-sld-parser
-              $ npm i geostyler-openlayers-parser
-              $ npm i geostyler-qgis-parser
-              $ npm i geostyler-mapbox-parser (*)
-
-              $ npm i geostyler-wfs-parser
-              $ npm i geostyler-geojson-parser
+              $ npm install -g geostyler-cli
             </code></pre>
-          <small style="float: right;">(*) Release ausstehend</small>
+        </section>
+
+        <!-- <section>
+          <h2>GeoStyler CLI</h2>
+          <pre><code data-trim class="bash">
+              # show options
+              $ geostyler -h
+            </code></pre>
+
+          <pre><code data-trim class="bash">
+            -h / --help Display the help and exit.
+            -o / --output Output filename or directory. Required. [string]
+            -s / --source Source parser, either mapbox, mapfile or map, sld, qgis or qml. If not given, it will be guessed from the extension of the input file. Mandatory if the the target is a directory.
+            -t / --target Target parser, either mapbox, sld, qgis or qml. If not given, it will be guessed from the extension of the output file. Mandatory if the the target is a directory. Mapfiles are currently not supported as target.
+            -v / --version Display the version of the program.
+            </code></pre>
+        </section> -->
+
+        <section>
+          <h2>GeoStyler CLI</h2>
+          <p>Konvertierung Ordner mit Stildokumenten</p>
+          <code>geostyler [options] /path/to/input/</code>
+          <br>
+          <pre><code data-trim class="bash">
+              # converts all Mapfiles in the given folder to SLD
+              $ geostyler -s mapfile -t sld -o /path/to/output /path/to/input/
+            </code></pre>
         </section>
 
         <!-- <section id="thanks-questions">
