@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="author" content="Jakob Miksch" />
+  <title> GIS mit der Kommandozeile | FOSSGIS 2021,
+    Rapperswil
+  </title>
+  <meta name="description" content="GIS mit der Kommandozeile/>
+  <!--[if lt IE 9]>
+    <script src="../shared/reveal.js-3.6.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+  <link rel="stylesheet" href="../shared/reveal.js-3.6.0/css/reveal.css" />
+  <link rel="stylesheet" href="../shared/reveal.js-3.6.0/css/theme/white.css" />
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Lato|Merriweather" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Cantarell" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/css/customized.css" />
+  <link rel="stylesheet" href="../shared/css/meggsimum.css" />
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="../shared/reveal.js-3.6.0/lib/css/zenburn.css" />
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ?
+      '../shared/reveal.js-3.6.0/css/print/pdf.css' :
+      '../shared/reveal.js-3.6.0/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+
+    if (window.location.search.match(/print-pdf/gi)) {
+      var linkCustomPrint = document.createElement('link');
+      linkCustomPrint.rel = 'stylesheet';
+      linkCustomPrint.type = 'text/css';
+      linkCustomPrint.href = '../shared/css/meggsimum-print.css';
+      document.getElementsByTagName('head')[0].appendChild(linkCustomPrint);
+    }
+  </script>
+
+</head>
+
+<body>
+
+
+  <!-- BEGIN OF SLIDES -->
+
+  <div class="reveal">
+    <div class="slides">
+
+      <section id="start">
+        <h1>GIS mit der Kommandozeile</h1>
+        <p>
+          <small>Jakob Miksch</small>
+          <br>
+          <small>meggsimum - Büro für Geoinformatik</small>
+        </p>
+        <p>
+          <span style="font-size: small;">FOSSGIS 2021, Rapperswil, 08.06.2021</span>
+        </p>
+      </section>
+
+      <section id="author-jakob-miksch">
+        <h2>Jakob Miksch</h2>
+        <div class="split-info">
+          <div class="part" style="width:35%">
+            <img src="../shared/img/jakob-miksch.jpg" class="plain" width="200" /><br />
+            <small>
+              <a class="email" href="mailto:jakob@meggsimum">jakob@meggsimum.de</a><br />
+              <a class="github" href="https://github.com/jakobmiksch">@jakobmiksch</a><br />
+              <a class="twitter" href="https://twitter.com/jakobmiksch">@jakobmiksch</a><br />
+            </small><br />
+          </div>
+          <div class="part" style="width:60%">
+            <div class="enumeration">
+              <ul>
+                <li>Geoinformatiker</li>
+                <li>Anwendungsentwickler</li>
+                <li>OSGeo Foundation Charter Member</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="clear:both"></div>
+      </section>
+
+      <section id="about-company-meggsimum">
+        <h2>meggsimum</h2>
+        <div class="split-info">
+          <div class="part" style="width:35%">
+            <img src="../shared/img/meggsimum-logo.png" class="plain" width="400" />
+            <br /><small>
+              <a class="email" href="mailto:info@meggsimum.de">info@meggsimum.de</a><br />
+              <a class="github" href="https://github.com/meggsimum/">@meggsimum</a><br />
+              <a class="twitter" href="https://twitter.com/meggsimum/">@meggsimum</a>
+            </small>
+          </div>
+          <div class="part" style="width:60%">
+            <div class="enumeration">
+              <ul>
+                <li><a href=" https://meggsimum.de/">meggsimum.de</a></li>
+                <li>Dienstleistungen im Bereich GIS, Webmapping &amp; GDI</li>
+                <li>Maßgeschneiderte WebGIS-Lösungen</li>
+                <li>Softwarekonzepte und Softwareentwicklung</li>
+                <li>Geodaten</li>
+                <li>Beratung und Schulung</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="clear:both"></div>
+      </section>
+
+      <section>
+        <h2>Warum?</h2>
+        <img src="img/tweet-commandline-geo.png" width="400">
+      </section>
+
+      <section>
+        <h2>Warum?</h2>
+        <ul>
+          <li>reproduzierbar</li>
+          <li>leichtgewichtig</li>
+          <li>zeitlos</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>GDAL/OGR</h2>
+        <img src="img/gdalicon.png" width="250">
+      </section>
+
+      <section>
+        <h2><a href="https://github.com/Toblerity/Fiona/blob/master/docs/cli.rst">fiona (OGR)</a> & <a href="https://github.com/mapbox/rasterio/blob/master/docs/cli.rst">rasterio (GDAL)</a></h2>
+        <ul>
+          <li>Wrapper für GDAL/OGR</li>
+          <li>Python</li>
+          <li>einfache Bedienung</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>fiona</h2>
+        Das Äquivalent zu <b>OGR</b> <br>
+      </section>
+
+      <section>
+        <h2>fiona</h2>
+        Formate <br>
+        <ul>
+          <li>CSV</li>
+          <li>Shapefile</li>
+          <li>GeoPackage</li>
+          <li>GPX</li>
+          <li>GeoJSON</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>fiona</h2>
+        <pre class="shell"><code data-trim data-noescape>
+        Usage: fio [OPTIONS] COMMAND [ARGS]...
+
+          Fiona command line interface.
+
+        Options:
+          -v, --verbose           Increase verbosity.
+          -q, --quiet             Decrease verbosity.
+          --aws-profile TEXT      Select a profile from the AWS credentials file
+          --aws-no-sign-requests  Make requests anonymously
+          --aws-requester-pays    Requester pays data transfer costs
+          --version               Show the version and exit.
+          --gdal-version          Show the version and exit.
+          --python-version        Show the version and exit.
+          --help                  Show this message and exit.
+
+        Commands:
+          bounds   Print the extent of GeoJSON objects
+          calc     Calculate GeoJSON property by Python expression
+          cat      Concatenate and print the features of datasets
+          collect  Collect a sequence of features.
+          distrib  Distribute features from a collection.
+          dump     Dump a dataset to GeoJSON.
+          env      Print information about the fio environment.
+          filter   Filter GeoJSON features by python expression.
+          info     Print information about a dataset.
+          insp     Open a dataset and start an interpreter.
+          load     Load GeoJSON to a dataset in another format.
+          ls       List layers in a datasource.
+          rm       Remove a datasource or an individual layer.
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>fio info</h2>
+        Informationen über Vektordaten
+        <pre class="shell"><code data-trim data-noescape>
+          fio info chapters.json
+        </code></pre>
+
+        <pre class="json"><code data-trim data-noescape>
+          {
+            "driver": "GeoJSON",
+            "schema": {
+              "properties": {
+                "location": "str",
+                "title": "str",
+                "twitter": "str",
+                "website": "str",
+                "meetup": "str",
+                "comingSoon": "str",
+                "organizers": "str",
+                "moreInfo": "str",
+                "github": "str",
+                "facebook": "str"
+              },
+              "geometry": "Point"
+            },
+            "crs": "EPSG:4326",
+            "crs_wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]]",
+            "bounds": [
+              -149.9,
+              -43.53137589928477,
+              172.63572692871094,
+              69.682778
+            ],
+            "name": "chapters",
+            "count": 114
+          }        </code></pre>
+      </section>
+
+      <section>
+        <h2>fio info</h2>
+        <pre class="shell"><code data-trim data-noescape>
+          fio info --count shp/countries.shp
+          # 177
+
+          fio info --bounds shp/countries.shp
+          # -180.0 -90.0 180.00000000000006 83.64513000000001
+
+          fio info --crs chapters.json
+          # EPSG:4326
+          </code></pre>
+      </section>
+
+      <section>
+        <h2> rasterio </h2>
+        Äquivalent zu GDAL
+        <pre class="shell"><code data-trim data-noescape>
+        Usage: rio [OPTIONS] COMMAND [ARGS]...
+
+          Rasterio command line interface.
+
+        Options:
+          -v, --verbose           Increase verbosity.
+          -q, --quiet             Decrease verbosity.
+          --aws-profile TEXT      Select a profile from the AWS credent
+          --aws-no-sign-requests  Make requests anonymously
+          --aws-requester-pays    Requester pays data transfer costs
+          --version               Show the version and exit.
+          --gdal-version
+          Terms of Use
+
+          You can use the API for your project, but please be fair - extensive usage will be throttled. We do not guarantee for the availability and usage might be subject of change in the future.
+
+          Have fun with photon and make OSM grow!
+
+        Commands:
+          blocks     Write dataset blocks as GeoJSON features.
+          bounds     Write bounding boxes to stdout as GeoJSON.
+          calc       Raster data calculator.
+          clip       Clip a raster to given bounds.
+          convert    Copy and convert raster dataset.
+          edit-info  Edit dataset metadata.
+          env        Print information about the Rasterio environment.
+          gcps       Print ground control points as GeoJSON.
+          info       Print information about a data file.
+          insp       Open a data file and start an interpreter.
+          mask       Mask in raster using features.
+          merge      Merge a stack of raster datasets.
+          overview   Construct overviews in an existing dataset.
+          rasterize  Rasterize features.
+          rm         Delete a dataset.
+          sample     Sample a dataset.
+          shapes     Write shapes extracted from bands or masks.
+          stack      Stack a number of bands into a multiband dataset.
+          transform  Transform coordinates.
+          warp       Warp a raster dataset.
+          </code></pre>
+      </section>
+
+      <section>
+        <h2>rio info</h2>
+        <pre class="shell"><code data-trim data-noescape>
+          rio info europe.tif
+        </code></pre>
+
+        <pre class="json"><code data-trim data-noescape>
+          {
+            "bounds": [
+              -19.1,
+              28.733333333000004,
+              45.866666667,
+              76.3
+            ],
+            "colorinterp": [
+              "red",
+              "green",
+              "blue"
+            ],
+            "count": 3,
+            "crs": "EPSG:4326",
+            "descriptions": [
+              null,
+              null,
+              null
+            ],
+            "driver": "GTiff",
+            "dtype": "uint8",
+            "height": 1427,
+            "indexes": [
+              1,
+              2,
+              3
+            ],
+            "interleave": "pixel",
+            "lnglat": [
+              13.383333333499998,
+              52.5166666665
+            ],
+            "mask_flags": [
+              [
+                "all_valid"
+              ],
+              [
+                "all_valid"
+              ],
+              [
+                "all_valid"
+              ]
+            ],
+            "nodata": null,
+            "res": [
+              0.03333333333350436,
+              0.03333333333356692
+            ],
+            "shape": [
+              1427,
+              1949
+            ],
+            "tiled": false,
+            "transform": [
+              0.03333333333350436,
+              0,
+              -19.1,
+              0,
+              -0.03333333333356692,
+              76.3,
+              0,
+              0,
+              1
+            ],
+            "units": [
+              null,
+              null,
+              null
+            ],
+            "width": 1949
+          }
+        </code></pre>
+
+      </section>
+
+      <section>
+        <h2>rio bounds</h2>
+        <pre class="shell"><code data-trim data-noescape>
+          rio bounds europe.tif
+        </code></pre>
+
+        <pre class="json"><code data-trim data-noescape>
+          {
+            "bbox": [
+              -19.1,
+              28.733333333000004,
+              45.866666667,
+              76.30000000000001
+            ],
+            "geometry": {
+              "coordinates": [
+                [
+                  [
+                    -19.1,
+                    28.733333333000004
+                  ],
+                  [
+                    45.866666667,
+                    28.733333333000004
+                  ],
+                  [
+                    45.866666667,
+                    76.30000000000001
+                  ],
+                  [
+                    -19.1,
+                    76.30000000000001
+                  ],
+                  [
+                    -19.1,
+                    28.733333333000004
+                  ]
+                ]
+              ],
+              "type": "Polygon"
+            },
+            "properties": {
+              "filename": "europe.tif",
+              "id": "0",
+              "title": "europe.tif"
+            },
+            "type": "Feature"
+          }
+
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>rio overview</h2>
+        <pre class="shell"><code data-trim data-noescape>
+          rio overview europe.tif --build auto
+        </code></pre>
+        <pre class="shell"><code data-trim data-noescape>
+          rio overview --ls europe.tif
+        </code></pre>
+        <pre class="shell"><code data-trim data-noescape>
+          Overview factors:
+          Band 1: [2, 4, 8] (method: 'nearest')
+          Band 2: [2, 4, 8] (method: 'nearest')
+          Band 3: [2, 4, 8] (method: 'nearest')
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>JavaScript basiert</h2>
+        <ul>
+          <li><a href="https://github.com/mbloch/mapshaper">mapshaper</a></li>
+          <li><a href="https://github.com/turf-junkyard/turf-cli">turf</a></li>
+          <li><a href="https://github.com/mapbox/geojsonio-cli">geojsonio</a></li>
+          <li><a href="https://github.com/tyrasd/osmtogeojson">osmtogeojson</a></li>
+          <li>...</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Mapshaper</h2>
+        Formate: <br>
+        <ul>
+          <li>GeoJSON</li>
+          <li>CSV</li>
+          <li>Shapefile</li>
+          <li>...</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Mapshaper</h2>
+        <pre class="shell"><code data-trim data-noescape>
+            Usage:  mapshaper -<command> [options] ...
+
+            I/O commands
+              -i               input one or more files
+              -o               output edited content
+
+            Editing commands
+              -affine          transform coordinates by shifting, scaling and rotating
+              -classify        apply sequential or categorical classification
+              -clean           fixes geometry issues, such as polygon overlaps and gaps
+              -clip            use a polygon layer to clip another layer
+              -colorizer       define a function to convert data values to color classes
+              -dissolve        merge features within a layer
+              -dissolve2       merge adjacent polygons (repairs overlaps and gaps)
+              -divide          divide lines by polygons, copy polygon data to lines
+              -dots            fill polygons with dots of one or more colors
+              -drop            delete layer(s) or elements within the target layer(s)
+              -each            create/update/delete data fields using a JS expression
+              -erase           use a polygon layer to erase another layer
+              -explode         divide multi-part features into single-part features
+              -filter          delete features using a JS expression
+              -filter-fields   retain a subset of data fields
+              -filter-islands  remove small detached polygon rings (islands)
+              -filter-slivers  remove small polygon rings
+              -graticule       create a graticule layer
+              -grid            create a grid of square or hexagonal polygons
+              -inlay           inscribe a polygon layer inside another polygon layer
+              -innerlines      convert polygons to polylines along shared edges
+              -join            join data records from a file or layer to a layer
+              -lines           convert a polygon or point layer to a polyline layer
+              -merge-layers    merge multiple layers into as few layers as possible
+              -mosaic          convert a polygon layer with overlaps into a flat mosaic
+              -point-grid      create a rectangular grid of points
+              -points          create a point layer from a different layer type
+              -polygons        convert polylines to polygons
+              -proj            project your data (using Proj.4)
+              -rectangle       create a rectangle from a bbox or target layer extent
+              -rectangles      create a rectangle around each feature in a layer
+              -rename-fields   rename data fields
+              -rename-layers   assign new names to layers
+              -simplify        simplify the geometry of polygon and polyline features
+              -snap            snap together nearby vertices
+              -sort            sort features using a JS expression
+              -split           split a layer into single-feature or multi-feature layers
+              -split-on-grid   split features into separate layers using a grid
+              -style           set SVG style properties using JS or literal values
+              -target          set active layer (or layers)
+              -union           create a flat mosaic from two or more polygon layers
+              -uniq            delete features with the same id as a previous feature
+
+            Experimental commands (may give unexpected results)
+              -cluster         group polygons into compact clusters
+              -data-fill       fill in missing values in a polygon layer
+              -include         import JS data and functions for use in JS expressions
+              -fuzzy-join      join points to polygons, with data fill and fuzzy match
+              -require         require a Node module for use in -each expressions
+              -run             create commands on-the-fly and run them
+              -shape           create a polyline or polygon from coordinates
+              -subdivide       recursively split a layer using a JS expression
+
+            Informational commands
+              -calc            calculate statistics about the features in a layer
+              -colors          print list of color scheme names
+              -encodings       print list of supported text encodings (for .dbf import)
+              -help, -h        print help; takes optional command name
+              -info            print information about data layers
+              -inspect         print information about a feature
+              -projections     print list of supported projections
+              -quiet           inhibit console messages
+              -verbose         print verbose processing messages
+              -version, -v     print mapshaper version
+
+            Enter mapshaper -help <command> to view options for a single command
+
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>Mapshaper</h2>
+        <pre class="shell"><code data-trim data-noescape>
+          mapshaper chapters.json -info
+        </code></pre>
+        <pre class="shell"><code data-trim data-noescape>
+          [info]
+          ==============================================
+          Layer:    chapters
+          ----------------------------------------------
+          Type:     point
+          Records:  114
+          Bounds:   -149.9,-43.53137589928477,172.63572692871094,69.682778
+          CRS:      +proj=longlat +datum=WGS84
+          Source:   chapters.json
+
+          Attribute data
+          ------------+---------------------------------
+          Field      | First value
+          ------------+---------------------------------
+          comingSoon | true
+          facebook   | undefined
+          github     | undefined
+          location   | 'Paris, France'
+          meetup     | ''
+          moreInfo   | null
+          organizers | [{"name":"nerik","twitter":""}]
+          title      | 'MaptimeParis'
+          twitter    | ''
+          website    | 'http://maptime.io/paris/'
+          ------------+---------------------------------
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>Mapshaper</h2>
+        Umwandlung Format
+        <pre class="shell"><code data-trim data-noescape>
+          mapshaper chapters.json -o chapters.shp
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>Mapshaper</h2>
+        <ul>
+          <li>Braucht nur JavaScript</li>
+          <li>kein GDAL/OGR nötig</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Deskop GIS Automatisieren</h2>
+        <ul>
+          <li>
+            QGIS -  <a href="https://docs.qgis.org/3.16/en/docs/user_manual/processing/standalone.html">qgis_process</a>
+          </li>
+          <li>
+            <a href="https://grass.osgeo.org/">GRASS GIS</a>
+          </li>
+          <li>
+            <a href="http://www.saga-gis.org/">SAGA GIS</a>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>qgis_process</h2>
+        <img src="img/qgis-menu.png" height="500">
+      </section>
+
+      <section>
+        <h2>qgis_process</h2>
+        <img src="img/qgis-hexagons.png" height="500">
+      </section>
+
+      <section>
+        <h2>qgis_process</h2>
+        <pre class="shell"><code data-trim data-noescape>
+          qgis_process run native:creategrid \
+          --EXTENT='243384.325300000,801830.577300000,4643821.257400000,5302965.980700000 [EPSG:32632]' \
+          --TYPE=4 \
+          --HSPACING=50000 \
+          --VSPACING=50000 \
+          --CRS='EPSG:32632' \
+          --OUTPUT='qgis-hex2.geojson'
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>qgis_process</h2>
+        <img src="img/qgis-log.png" height="500">
+      </section>
+
+      <section>
+        <h2>qgis_process</h2>
+        <ul>
+          <li>geht mit allen Processing-Tools</li>
+          <li>auch mit eigenen und Plugins</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Schnittstellen (APIs)</h2>
+        <ul>
+          <li>GeoCoding</li>
+          <li>Routenplanung</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>GeoCoding mit <a href="https://photon.komoot.io/">Photon</a></h2>
+        <pre class="shell"><code data-trim data-noescape>
+          curl 'https://photon.komoot.io/api/?q=rapperswil' \
+          > rapperswil.geojson
+        </code></pre>
+        <pre class="json"><code data-trim data-noescape>
+          {
+            "features": [
+              {
+                "geometry": {
+                  "coordinates": [
+                    8.8245459,
+                    47.2269198
+                  ],
+                  "type": "Point"
+                },
+                "type": "Feature",
+                "properties": {
+                  "osm_id": 240062727,
+                  "osm_type": "N",
+                  "country": "Schweiz/Suisse/Svizzera/Svizra",
+                  "osm_key": "place",
+                  "city": "Rapperswil-Jona",
+                  "countrycode": "CH",
+                  "osm_value": "town",
+                  "postcode": "8640",
+                  "name": "Rapperswil",
+                  "county": "Wahlkreis See-Gaster",
+                  "state": "Sankt Gallen",
+                  "type": "district"
+                }
+              },
+              {
+                "geometry": {
+                  "coordinates": [
+                    8.815640768301005,
+                    47.2273187
+                  ],
+                  "type": "Point"
+                },
+                "type": "Feature",
+                "properties": {
+                  "osm_id": 417258377,
+                  "extent": [
+                    8.8153123,
+                    47.2275216,
+                    8.8159567,
+                    47.2271274
+                  ],
+                  "country": "Schweiz/Suisse/Svizzera/Svizra",
+                  "city": "Rapperswil",
+                  "countrycode": "CH",
+                  "postcode": "8640",
+                  "county": "Wahlkreis See-Gaster",
+                  "type": "house",
+                  "osm_type": "W",
+                  "osm_key": "historic",
+                  "street": "Lindenhügel",
+                  "district": "Rapperswil",
+                  "osm_value": "castle",
+                  "name": "Schloss Rapperswil",
+                  "state": "Sankt Gallen"
+                }
+              },
+              {
+                "geometry": {
+                  "coordinates": [
+                    8.8156217,
+                    47.2272484
+                  ],
+                  "type": "Point"
+                },
+                "type": "Feature",
+                "properties": {
+                  "osm_id": 4192210341,
+                  "country": "Schweiz/Suisse/Svizzera/Svizra",
+                  "city": "Rapperswil-Jona",
+                  "countrycode": "CH",
+                  "postcode": "8640",
+                  "county": "Wahlkreis See-Gaster",
+                  "type": "house",
+                  "osm_type": "N",
+                  "osm_key": "tourism",
+                  "street": "Hauptplatz",
+                  "district": "Rapperswil",
+                  "osm_value": "museum",
+                  "name": "Polenmuseum",
+                  "state": "Sankt Gallen"
+                }
+              }
+            ],
+            "type": "FeatureCollection"
+          }
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>
+          Umwandlung in CSV
+        </h2>
+        <pre class="shell"><code data-trim data-noescape>
+          mapshaper \
+          -i rapperswil.geojson \
+          -o rapperswil.csv
+        </code></pre>
+        <img src="img/geocoding-table.png">
+      </section>
+
+      <section>
+        <h2>Weitere Programme</h2>
+        <ul>
+          <li><a href="https://osmcode.org/osmium-tool/">osmium</a></li>
+          <li><a href="https://github.com/jblindsay/whitebox-tools">Whitebox Tools</a></li>
+          <li><a href="https://geostyler.org/">geostyler</a></li>
+          <li><a href="https://rapidlasso.com/lastools/">lastools</a></li>
+          <li><a href="https://github.com/OpenDroneMap/ODM">OpenDroneMap</a></li>
+          <li>...</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Links</h2>
+        <ul>
+          <li>
+            <a href="https://github.com/JakobMiksch/geospatial-cli">Sammlung Programme Kommandozeile</a>
+          </li>
+          <li><a href="https://medium.com/@mbostock/command-line-cartography-part-1-897aa8f8ca2c#06f4">Blogpost: Commandline Geography</a></li>
+          <li><a href="https://media.ccc.de/v/bucharest-212-are-we-going-back-to-command-line-gis-">Talk: Are we going back to commandline GIS?</a></li>
+
+        </ul>
+      </section>
+
+      <section id="imprint">
+        <h2>Impressum</h2>
+        <h4>Autor</h4>
+        <div style="">
+          <address style="">
+            <strong>Jakob Miksch</strong><br />
+            <span style="font-size: smaller;">
+              meggsimum - Büro für Geoinformatik (Christian Mayer)<br />
+              Schillerstraße 2a<br />
+              67122 Mutterstadt<br />
+              info@meggsimum.de
+            </span>
+          </address>
+        </div>
+        <h4 style="margin-top: 20px;">Lizenz</h4>
+        <p id="license">
+          Diese Folien sind unter <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA</a>
+          veröffentlicht.
+        </p>
+        <p>
+          <a
+            href="https://meggsimum.github.io/fossgis2021/zeitbasierte-geodaten/#/start">Vortragsfolien</a>,
+          <!-- <a
+            href="https://meggsimum.github.io/fossgis2021/zeitbasierte-geodaten/zeitbasierte-geodaten_fossgis_2021.pdf">PDF-Version</a>, -->
+          <a href="https://github.com/meggsimum/fossgis2021">git repository</a>
+        </p>
+      </section>
+
+    </div>
+  </div>
+
+
+  <!-- END OF SLIDES -->
+
+
+  <script src="../shared/reveal.js-3.6.0/lib/js/head.min.js"></script>
+  <script src="../shared/reveal.js-3.6.0/js/reveal.js"></script>
+  <script>
+    (function () {
+      var revealPath = '../shared/reveal.js-3.6.0/';
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          {
+            src: revealPath + 'plugin/markdown/marked.js'
+          },
+          {
+            src: revealPath + 'plugin/markdown/markdown.js'
+          },
+          {
+            src: revealPath + 'plugin/notes/notes.js',
+            async: true
+          },
+          {
+            src: revealPath + 'plugin/highlight/highlight.js',
+            async: true,
+            callback: function () {
+              hljs.initHighlightingOnLoad();
+            }
+          }
+        ]
+      });
+    }());
+  </script>
+</body>
+
+</html>
