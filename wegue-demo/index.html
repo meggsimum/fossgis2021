@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="author" content="Jakob Miksch" />
+    <title>Webmaps effizient mit Wegue erstellen | FOSSGIS 2021,
+      Rapperswil</title>
+    <meta name="description" content="Wegue - OpenLayers und Vue.js in der Praxis" />
+    <!--[if lt IE 9]>
+    <script src="../shared/reveal.js-3.6.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="../shared/reveal.js-3.6.0/css/reveal.css" />
+    <link rel="stylesheet" href="../shared/reveal.js-3.6.0/css/theme/white.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Cantarell" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/css/customized.css" />
+    <link rel="stylesheet" href="../shared/css/meggsimum.css" />
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../shared/reveal.js-3.6.0/lib/css/zenburn.css" />
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ?
+        '../shared/reveal.js-3.6.0/css/print/pdf.css' :
+        '../shared/reveal.js-3.6.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+
+      if (window.location.search.match( /print-pdf/gi )) {
+        var linkCustomPrint = document.createElement( 'link' );
+        linkCustomPrint.rel = 'stylesheet';
+        linkCustomPrint.type = 'text/css';
+        linkCustomPrint.href = '../shared/css/meggsimum-print.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( linkCustomPrint );
+      }
+    </script>
+
+  </head>
+  <body>
+
+
+<!-- BEGIN OF SLIDES -->
+
+    <div class="reveal">
+      <div class="slides">
+
+        <section id="start">
+          <h2>Webmaps effizient mit Wegue erstellen</h1>
+          <p>
+            <small>Jakob Miksch</small>
+            <br>
+            <small>meggsimum - Büro für Geoinformatik</small>
+          </p>
+          <p>
+            <span style="font-size: small;">FOSSGIS 2021, Rapperswil, 08.06.2021</span>
+          </p>
+        </section>
+
+        <section id="author-jakob-miksch">
+          <h2>Jakob Miksch</h2>
+          <div class="split-info">
+            <div class="part" style="width:35%">
+              <img src="../shared/img/jakob-miksch.jpg" class="plain" width="200" /><br />
+              <small>
+                <a class="email" href="mailto:jakob@meggsimum">jakob@meggsimum.de</a><br />
+                <a class="github" href="https://github.com/jakobmiksch">@jakobmiksch</a><br />
+                <a class="twitter" href="https://twitter.com/jakobmiksch">@jakobmiksch</a><br />
+              </small><br />
+            </div>
+            <div class="part" style="width:60%">
+              <div class="enumeration">
+                <ul>
+                  <li>Geoinformatiker</li>
+                  <li>Anwendungsentwickler</li>
+                  <li>OSGeo Foundation Charter Member</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div style="clear:both"></div>
+        </section>
+
+        <section id="about-company-meggsimum">
+          <h2>meggsimum</h2>
+          <div class="split-info">
+            <div class="part" style="width:35%">
+              <img src="../shared/img/meggsimum-logo-s-rgb-500.png" class="plain" />
+              <br /><br />
+              <a class="github" style="font-size: smaller;" href="https://github.com/meggsimum/">@meggsimum</a><br />
+              <a class="twitter" style="font-size: smaller;" href="https://twitter.com/meggsimum/">@meggsimum</a>
+            </div>
+            <div class="part" style="width:60%">
+              <div class="enumeration">
+                <ul>
+                  <li><a href="https://meggsimum.de/">meggsimum.de</a></li>
+                  <li>Mutterstadt / Pfalz (D)</li>
+                  <li>Dienstleistungen im Bereich GIS, Webmapping &amp; GDI</li>
+                  <!-- <li>Maßgeschneiderte WebGIS-Lösungen</li> -->
+                  <li>Softwarekonzepte und Softwareentwicklung</li>
+                  <!-- <li>Geodaten</li> -->
+                  <li>Beratung und Schulung</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div style="clear:both"></div>
+        </section>
+
+        <section>
+          <h2>Wegue</h2>
+          <ul>
+            <li>Template für leichtgewichtigen WebGIS-Client-Anwendungen</li>
+            <li>Kombiniert <a href="https://vuejs.org/">Vue.js</a> und <a href="https://openlayers.org">OpenLayers</a></li>
+            <li>Wiederverwendbare WebGIS-UI-Komponenten</li>
+            <li>Konfigurierbar mittels JSON</li>
+            <li>EcmaScript</li>
+            <li>Beliebiger JavaScript-Code ergänzbar</li>
+            <li>Optimiert für alle Endgeräte</li>
+            <li>Lizenz: BSD-2-Clause</li>
+            <li><a href="https://github.com/meggsimum/wegue" title="Wegue Code Repository">Code (github)</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Vue.js</h2>
+          <ul>
+            <li>Clientseitiges JavaScript-Webframework (MVVM)</li>
+            <li>Flexibel einsetzbar (Standalone & Embedded)</li>
+            <li>Einfache API, leicht zu erlernen</li>
+            <li>Mächtige Template-Engine</li>
+            <li>Projektstruktur ohne zu viele Einschränkungen</li>
+            <li>Two-Way-Binding, Direktiven, (vererbbare) Komponenten, ...</li>
+            <li>Lizenz: MIT</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>OpenLayers</h2>
+          <blockquote>
+            A high-performance, feature-packed library for all your mapping needs.
+            <footer>&mdash; <cite><a href="https://openlayers.org/">openlayers.org, 01. Juli 2019</a></cite></footer>
+          </blockquote>
+          <ul>
+            <li>JavaScript Mapping-Bibliothek</li>
+            <li>OSGeo Projekt</li>
+            <li>Viele Daten- & Layerquellen, Interaktionen & Steuerelemente, ...</li>
+            <li>Lizenz: BSD</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Komponenten</h2>
+          <ul>
+            <li>Layer-Liste</li>
+            <li>Messwerkzeuge für Strecken und Flächen</li>
+            <li>Selektionswerkzeug für Vektordaten</li>
+            <li>Hover Tooltip für Vektordaten</li>
+            <li>Attributanzeige</li>
+            <li>Koordinatenanzeige</li>
+            <li>Toolbar zur Platzierung von Werkzeugen</li>
+            <li>konfigurierbares Hilfe-Fenster</li>
+            <li>Layer Loading GIF</li>
+            <li>...</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Neuerungen</h2>
+          <ul>
+            <li>Attribut-Tabelle</li>
+            <li>Docker-Image</li>
+            <li>erweitertes Layer-Styling</li>
+            <li>Permalink</li>
+            <li>QGIS-Plugin</li>
+            <li>Online-Dokumenation auf <a href="http://wegue.org/">http://wegue.org/</a></li>
+            <li>Geodaten Drag&Drop</li>
+            <li>GeoCoding</li>
+            <li>Upgrade auf neueste Basis-Bibliotheken</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Wegue installieren</h2>
+          <video controls height="350">
+            <source data-src="video/01-wegue-setup.mp4" type="video/mp4" />
+          </video>
+        </section>
+
+        <section>
+          <h2>Eine einfache App</h2>
+          <video controls height="350">
+            <source data-src="video/02-wegue-simple-app.mp4" type="video/mp4" />
+          </video>
+        </section>
+
+        <section>
+          <h2>Module</h2>
+          <video controls height="350">
+            <source data-src="video/03-wegue-modul.mp4" type="video/mp4" />
+          </video>
+        </section>
+
+        <section>
+          <h2>Mehr Module</h2>
+          <video controls height="350">
+            <source data-src="video/04-wegue-more-modules.mp4" type="video/mp4" />
+          </video>
+        </section>
+
+        <section>
+          <h2>QGIS2Wegue</h2>
+          <video controls height="350">
+            <source data-src="video/05-qgis2wegue.mp4" type="video/mp4" />
+          </video>
+        </section>
+
+        <section>
+          <h2>Styling</h2>
+          <video controls height="350">
+            <source data-src="video/06-wegue-styling.mp4" type="video/mp4" />
+          </video>
+        </section>
+
+        <section>
+          <h2>Permalink</h2>
+          <video controls height="350">
+            <source data-src="video/07-wegue-permalink.mp4" type="video/mp4" />
+          </video>
+        </section>
+
+        <section>
+          <h2>Attribut-Tabelle</h2>
+          <video controls height="350">
+            <source data-src="video/08-wegue-attribute-table-selection.mp4" type="video/mp4" />
+          </video>
+        </section>
+
+        <section>
+          <h2>App Kontext</h2>
+          <video controls height="350">
+            <source data-src="video/09-wegue-appCtx.mp4" type="video/mp4" />
+          </video>
+        </section>
+
+        <section>
+          <h2>App veröffentlichen</h2>
+          <video controls height="350">
+            <source data-src="video/10-wegue-built.mp4" type="video/mp4" />
+          </video>
+        </section>
+
+        <section>
+          <h2><a href="https://meggsimum.github.io/wegue/#/gallery" target="_blank">Demo Anwendungen</a></h2>
+        </section>
+
+        <section id="imprint">
+          <h2>Impressum</h2>
+          <h4>Autor</h4>
+          <div style="">
+            <address style="">
+              <strong>Jakob Miksch</strong><br />
+              <span style="font-size: smaller;">
+                meggsimum - Büro für Geoinformatik (Christian Mayer)<br />
+                Schillerstraße 2a<br />
+                67122 Mutterstadt<br />
+                info@meggsimum.de
+              </span>
+            </address>
+          </div>
+          <h4 style="margin-top: 20px;">Lizenz</h4>
+          <p id="license">
+            Diese Folien sind unter <a
+            href="http://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA</a>
+            veröffentlicht.
+          </p>
+          <p>
+            <a href="https://meggsimum.github.io/fossgis2021/wegue-talk/#/start">Vortragsfolien</a>,
+            <!-- <a href="https://meggsimum.github.io/fossgis2021/wegue-talk/wegue-fossgis2021.pdf">PDF-Version</a>, -->
+            <a href="https://github.com/meggsimum/fossgis2021">git repository</a>
+          </p>
+        </section>
+
+      </div>
+    </div>
+
+
+<!-- END OF SLIDES -->
+
+
+    <script src="../shared/reveal.js-3.6.0/lib/js/head.min.js"></script>
+    <script src="../shared/reveal.js-3.6.0/js/reveal.js"></script>
+    <script>
+(function () {
+  var revealPath = '../shared/reveal.js-3.6.0/';
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    history: true,
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      {
+        src: revealPath + 'plugin/markdown/marked.js'
+      },
+      {
+        src: revealPath + 'plugin/markdown/markdown.js'
+      },
+      {
+        src: revealPath + 'plugin/notes/notes.js',
+        async: true
+      },
+      {
+        src: revealPath + 'plugin/highlight/highlight.js',
+        async: true,
+        callback: function() {
+          hljs.initHighlightingOnLoad();
+        }
+      }
+    ]
+  });
+}());
+    </script>
+  </body>
+</html>
