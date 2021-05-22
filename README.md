@@ -12,7 +12,7 @@ Materialien für die FOSSGIS Konferenz 2021 als Online-Konferenz
 
 - [GIS mit der Kommandozeile
 ](https://meggsimum.github.io/fossgis2021/gis-kommandozeile)
-- [Wer hat an der Uhr gedreht? - Zeitbasierte Geodaten modellieren, abfragen und visualiseren
+- [Wer hat an der Uhr gedreht? - Zeitbasierte Geodaten modellieren, abfragen und visualisieren
 ](https://meggsimum.github.io/fossgis2021/zeitbasierte-geodaten)
 
 
